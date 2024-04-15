@@ -47,3 +47,9 @@ php artisan migrate
 
 Acesse o projeto
 [http://localhost:8000](http://localhost:8000)
+
+Rode as factories 
+```sh
+php artisan tinker
+\App\Models\Hotels::factory()->count(10)->create();
+```
