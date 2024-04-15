@@ -14,9 +14,11 @@ class RoomsRepository
        $this->entity = $model;
     }
 
-    public function getAllRooms()
+    public function getAllRoomsOfHotels($hotelId)
     {
-       return $this->entity->get();
+       return $this->entity
+                   ->where('hotel_id', $hotelId)
+                   ->get();
     }
 
     public function getRoomsById($identify)

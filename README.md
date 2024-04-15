@@ -51,5 +51,5 @@ Acesse o projeto
 Rode as factories 
 ```sh
 php artisan tinker
-\App\Models\Hotels::factory()->count(10)->create();
+\App\Models\Rooms::factory()->count(10)->create();
 ```

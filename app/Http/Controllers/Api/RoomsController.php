@@ -19,9 +19,9 @@ class RoomsController extends Controller
         $this->repository = $roomsRepository;
     }
 
-    public function index()
+    public function index($hotelsId)
     {   
-        return RoomsResource::collection($this->repository->getAllRooms());
+        return RoomsResource::collection($this->repository->getAllRoomsOfHotels($hotelsId));
     }
 
     public function show($id)
