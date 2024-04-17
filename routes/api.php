@@ -1,8 +1,16 @@
 <?php
 
 use App\Http\Controllers\Api\HotelsController;
+use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\RoomsController;
 use Illuminate\Support\Facades\Route;
+
+/*
+* AUTH
+*/
+Route::post('/auth', [AuthController::class, 'auth']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
 Route::middleware(['auth:sanctum'])->group(function(){
 
