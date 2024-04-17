@@ -16,12 +16,12 @@ class HotelsRepository
 
     public function getAllHotels()
     {
-       return $this->entity->get();
+       return $this->entity->with("rooms")->get();
     }
 
     public function getHotelsById($identify)
     {
-       return $this->entity->findOrFail($identify);
+       return $this->entity->with("rooms")->findOrFail($identify);
     }
 
     public function createHotels(array $data)
