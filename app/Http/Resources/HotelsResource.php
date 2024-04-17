@@ -22,6 +22,8 @@ class HotelsResource extends JsonResource
               'Estado' => $this->state,
               'Cep' => $this->zip_code,
               'Website' => $this->website,
+              'Quartos' => RoomsResource::collection($this->whenLoaded('rooms')),
+
         ];
     }
 }
