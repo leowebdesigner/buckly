@@ -53,3 +53,10 @@ php artisan tinker -- acesse o tinker para rodar
 
 Todos os hoteís serão criados com endereço automático entre 3 ceps que deixei na factory usando a api VIACEP
 ```
+
+Acesso ao phpmyAdmin - Banco de dados
+```sh
+http://localhost:8080/ 
+usuário: username
+senha: userpass
+```
