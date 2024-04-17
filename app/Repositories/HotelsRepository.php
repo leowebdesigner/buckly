@@ -3,15 +3,18 @@
 namespace App\Repositories;
 
 use App\Models\Hotels;
+use App\Services\ViaCepService;
 use Illuminate\Support\Facades\Log;
 
 class HotelsRepository
 {
     protected $entity;
+    protected $viaCepService;
 
-    public function __construct(Hotels $model)
+    public function __construct(Hotels $model, ViaCepService $viaCepService)
     {
        $this->entity = $model;
+       $this->viaCepService = $viaCepService;
     }
 
     public function getAllHotels()
@@ -27,12 +30,13 @@ class HotelsRepository
     public function createHotels(array $data)
     {
         try {
-            $hotel = $this->entity->create([
+            $addressData = $this->viaCepService->getAddressDetails($data['zip_code']);
+            $this->entity->create([
                 'name' => $data['name'],
-                'address' => $data['address'],
-                'city' => $data['city'],
-                'state' => $data['state'],
-                'zip_code' => $data['zip_code'],
+                'address' => $addressData['address'],
+                'city' => $addressData['city'],
+                'state' => $addressData['state'],
+                'zip_code' => $addressData['zip_code'],
                 'website' => $data['website'],
             ]);
 

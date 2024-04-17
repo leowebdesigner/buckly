@@ -31,7 +31,9 @@ class HotelsController extends Controller
 
     public function create(StoreHotels $request)
     {   
-        $hotels = $this->repository->createHotels($request->validated());
+        $data = $request->validationData();
+        $hotels = $this->repository->createHotels($data);
+        
         return $hotels;
     }
 
