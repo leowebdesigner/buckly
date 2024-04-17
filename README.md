@@ -52,4 +52,5 @@ Rode as factories
 ```sh
 php artisan tinker
 \App\Models\Rooms::factory()->count(10)->create();
+\App\Models\User::factory()->count(10)->create();
 ```
