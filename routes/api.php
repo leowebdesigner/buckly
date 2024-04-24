@@ -5,29 +5,36 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\RoomsController;
 use Illuminate\Support\Facades\Route;
 
-/*
-* AUTH
-*/
+// Rotas de autenticação
 Route::post('/auth', [AuthController::class, 'auth']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
+// Rotas protegidas por autenticação
 Route::middleware(['auth:sanctum'])->group(function(){
 
-Route::get('/hotels', [HotelsController::class, 'index']);
-Route::get('/hotels/{id}', [HotelsController::class, 'show']);
-Route::post('/hotels', [HotelsController::class, 'create']);
-Route::delete('/hotels/{id}', [HotelsController::class, 'delete']);
-Route::put('/hotels/{id}', [HotelsController::class, 'update']);
+    // Rotas da API para hotéis
+    Route::get('/api/hotels', [HotelsController::class, 'index']);
+    Route::get('/hotels/{id}', [HotelsController::class, 'show']);
+    Route::post('/hotels', [HotelsController::class, 'create']);
+    Route::delete('/hotels/{id}', [HotelsController::class, 'delete']);
+    Route::put('/hotels/{id}', [HotelsController::class, 'update']);
 
-Route::get('/hotels/{id}/rooms', [RoomsController::class, 'index']);
-Route::get('/rooms/{id}', [RoomsController::class, 'show']);
-Route::post('/rooms', [RoomsController::class, 'create']);
-Route::delete('/rooms/{id}', [RoomsController::class, 'delete']);
-Route::put('/rooms/{id}', [RoomsController::class, 'update']);
+    // Rotas da API para quartos
+    Route::get('/hotels/{id}/rooms', [RoomsController::class, 'index']);
+    Route::get('/rooms/{id}', [RoomsController::class, 'show']);
+    Route::post('/rooms', [RoomsController::class, 'create']);
+    Route::delete('/rooms/{id}', [RoomsController::class, 'delete']);
+    Route::put('/rooms/{id}', [RoomsController::class, 'update']);
+
+    // Rota para a view Blade que contém o componente Livewire
+    Route::get('/hotels', function () {
+        return view('livewire.hotels.index');
+    })->name('hotels.index');
 
 });
 
+// Rota de boas-vindas
 Route::get('/', function (){
     return response()->json([
         'success' => true,
