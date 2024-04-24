@@ -38,7 +38,7 @@ class HotelsController extends Controller
         $data = $request->validationData();
         $hotels = $this->repository->createHotels($data);
 
-        return $hotels;
+        return $this->respondJsonOrView($hotels, 'livewire.hotels.show');
     }
 
     public function update(Request $request, $id)
@@ -53,7 +53,7 @@ class HotelsController extends Controller
             $fieldsToUpdate = $request->only(array_keys($request->all()));
             $updateResult = $this->repository->updateHotels($fieldsToUpdate, $hotel);
 
-            return $updateResult;
+            return $this->respondJsonOrView($updateResult, 'livewire.hotels.update');
 
         } catch (\Exception $e) {
             Log::error('Erro ao atualizar hotel: ' . $e->getMessage());
@@ -64,6 +64,6 @@ class HotelsController extends Controller
     public function delete($id)
     {
         $hotels = $this->repository->deleteHotels($id);
-        return $hotels;
+        return $this->respondJsonOrView($hotels, 'livewire.hotels.delete');
     }
 }

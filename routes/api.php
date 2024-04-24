@@ -16,9 +16,9 @@ Route::middleware(['auth:sanctum'])->group(function(){
     // Rotas da API para hotéis
     Route::get('/api/hotels', [HotelsController::class, 'index']);
     Route::get('/api/hotels/{id}', [HotelsController::class, 'show']);
-    Route::post('/hotels', [HotelsController::class, 'create']);
-    Route::delete('/hotels/{id}', [HotelsController::class, 'delete']);
-    Route::put('/hotels/{id}', [HotelsController::class, 'update']);
+    Route::post('/api/hotels', [HotelsController::class, 'create']);
+    Route::delete('/api/hotels/{id}', [HotelsController::class, 'delete']);
+    Route::put('/api/hotels/{id}', [HotelsController::class, 'update']);
 
     // Rotas da API para quartos
     Route::get('/hotels/{id}/rooms', [RoomsController::class, 'index']);
@@ -27,13 +27,22 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('/rooms/{id}', [RoomsController::class, 'delete']);
     Route::put('/rooms/{id}', [RoomsController::class, 'update']);
 
-    // Rota para a view Blade que contém o componente Livewire
+    // Rota hotéis para a view Blade que contém o componente Livewire
     Route::get('/hotels', function () {
         return view('livewire.hotels.index');
     })->name('hotels.index');
     Route::get('/hotels/{id}', function () {
         return view('livewire.hotels.show');
     })->name('hotels.show');
+    Route::post('/hotels', function () {
+        return view('livewire.hotels.create');
+    })->name('hotels.create');
+    Route::delete('/hotels/{id}', function () {
+        return view('livewire.hotels.delete');
+    })->name('hotels.delete');
+    Route::put('/hotels/{id}', function () {
+        return view('livewire.hotels.update');
+    })->name('hotels.update');
 
 });
 
