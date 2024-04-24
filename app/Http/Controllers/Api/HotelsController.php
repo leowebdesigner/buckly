@@ -29,7 +29,8 @@ class HotelsController extends Controller
 
     public function show($id)
     {
-        return new HotelsResource($this->repository->getHotelsById($id));
+        $hotel = $this->repository->getHotelsById($id);
+        return $this->respondJsonOrView(new HotelsResource($hotel));
     }
 
     public function create(StoreHotels $request)

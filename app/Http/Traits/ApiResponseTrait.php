@@ -4,7 +4,7 @@ namespace App\Http\Traits;
 
 trait ApiResponseTrait
 {
-    protected function respondJsonOrView($data, $view)
+    protected function respondJsonOrView($data, $view = null)
     {
         if (request()->ajax() || request()->wantsJson()) {
             return $data;

@@ -15,7 +15,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     // Rotas da API para hotéis
     Route::get('/api/hotels', [HotelsController::class, 'index']);
-    Route::get('/hotels/{id}', [HotelsController::class, 'show']);
+    Route::get('/api/hotels/{id}', [HotelsController::class, 'show']);
     Route::post('/hotels', [HotelsController::class, 'create']);
     Route::delete('/hotels/{id}', [HotelsController::class, 'delete']);
     Route::put('/hotels/{id}', [HotelsController::class, 'update']);
@@ -31,6 +31,9 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('/hotels', function () {
         return view('livewire.hotels.index');
     })->name('hotels.index');
+    Route::get('/hotels/{id}', function () {
+        return view('livewire.hotels.show');
+    })->name('hotels.show');
 
 });
 
